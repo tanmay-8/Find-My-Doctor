@@ -1,6 +1,6 @@
 import "./index.css"
 import Home from "./Components/Home";
-import Login from "./Components/Login";
+import Signin from "./Components/Signin";
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -11,7 +11,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Home/>}></Route>
           {/* <Route path="/Signup" element={<SignUp/>}></Route> */}
-          <Route path="/Login" element={<Login/>}></Route>
+          <Route path="/Signin" element={<Signin/>}></Route>
       </Routes>
     </div>
   );

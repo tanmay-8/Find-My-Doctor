@@ -6,7 +6,7 @@ function Home() {
   const nevigate = useNavigate();
 
   const toLogin = () => {
-    nevigate("/Login");
+    nevigate("/Signin");
   };
 
   useEffect(()=>{

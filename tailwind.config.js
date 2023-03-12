@@ -12,8 +12,6 @@ module.exports = {
           "h-login":"34rem"
         },
         fontFamily:{
-          logo:['Courgette', 'cursive'],
-          quote:['Lora', 'serif'],
           regular:['Varela Round', 'sans-serif'],
         
         },
