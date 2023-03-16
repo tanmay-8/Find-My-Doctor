@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DoctorImg from "../Images/doctor.png";
 import Logo from "../Images/logo.png";
 import Login from "./Login";
 import Signup from "./Signup";
 
 function Signin() {
+    const nevigate = useNavigate();
+    const [token,setToken] = useState(null);
+
+    useEffect(()=>{
+        if(token!=null){
+            localStorage.setItem("Health-token",token);
+            nevigate("/");
+        }
+        //eslint-disable-next-line
+    },[token])
+
+    const setTokenF=(token)=>{
+        setToken(token)
+    }
+
   const toLogin = () => {
     let loginD = document.getElementById("login");
     let signupD = document.getElementById("signup");
     let forms = document.getElementById("forms");
-    // let loginF = document.getElementById("loginForm");
-    // let signupF = document.getElementById("signupForm");
 
     if (loginD.classList.contains("text-white")) {
       loginD.classList.add("border-b-4");
@@ -25,8 +39,6 @@ function Signin() {
     let loginD = document.getElementById("login");
     let signupD = document.getElementById("signup");
     let forms = document.getElementById("forms");
-    // let loginF = document.getElementById("loginForm");
-    // let signupF = document.getElementById("signupForm");
 
     if (signupD.classList.contains("text-white")) {
       signupD.classList.add("border-b-4");
@@ -41,10 +53,10 @@ function Signin() {
     <div className="p-5 h-auto flex justify-center md:min-h-screen bg-sign-bg bg-cover bg-no-repeat bg-center md:p-20 items-center">
       <div className="md:flex w-full md:h-h-login lg:w-5/6 rounded-3xl shadow-xl">
         <div className="rounded-t-2xl md:w-2/5 md:h-full bg-slate-100 md:rounded-l-3xl text-white">
-          <div className="rounded-t-2xl rounded-b-half w-full h-full p-15 justify-center bg-gradient-to-tr from-rose-400  via-rose-500 to-rose-600 md:rounded-3xl md:rounded-br-extra md:rounded-tr-none">
-            <div className=" flex pt-6 pb-8 px-4 items-center  space-x-2 w-fit mx-auto">
-              <img src={Logo} alt={"logo"} className="w-8 invert"></img>
-              <p className="text-xl font-bold">Find My Doctor</p>
+          <div className="rounded-t-2xl rounded-b-half w-full h-full p-15 justify-center bg-gradient-to-tr from-rose-400  via-rose-500 to-rose-600 md:rounded-3xl md:rounded-br-extra md:rounded-tr-none font-logo">
+            <div className=" flex pt-6 pb-8 px-4 items-center  space-x-4 w-fit mx-auto ">
+              <img src={Logo} alt={"logo"} className="w-9 invert cursor-pointer hover:w-10"></img>
+              <p className="text-2xl font-bold cursor-pointer hover:text-3xl">Find My Doctor</p>
             </div>
             <img
               src={DoctorImg}
@@ -80,8 +92,8 @@ function Signin() {
                   className="w-2full h-full rounded-2xl flex transition-all duration-500"
                   id="forms"
                 >
-                    <Login/>
-                    <Signup/>
+                  <Login set={(e)=>setTokenF(e)} />
+                  <Signup set={setTokenF} />
                 </div>
               </div>
             </div>
