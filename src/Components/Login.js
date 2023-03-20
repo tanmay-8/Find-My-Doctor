@@ -32,6 +32,7 @@ function Login() {
  
        if (json.success) {
          localStorage.setItem("Health-token",json.authtoken)
+         localStorage.setItem("Health-place",json.city)
          nevigate("/")
        } else{
          alert.innerHTML = json.error 
@@ -71,7 +72,7 @@ function Login() {
           <input
             type={"submit"}
             value={"Login"}
-            className="w-fit mx-auto bg-blue-400 text-white rounded-lg text-lg p-3 cursor-pointer"
+            className="w-fit mx-auto bg-blue-500 text-white rounded-lg text-lg p-3 cursor-pointer hover:scale-110 transition-all"
           ></input>
         </div>
         <p id="alert" className="text-sm h-5 text-red-600 text-center"></p>

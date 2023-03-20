@@ -1,36 +1,23 @@
-import React, {  useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import Intro from "./Intro";
+import Sidebar from "./Sidebar";
+import "reactjs-popup/dist/index.css";
+import HomeMain from "./HomeMain";
 
 function Home() {
-  let [token, setToken] = useState(localStorage.getItem("Health-token"));
-  const nevigate = useNavigate();
-
-  const toLogin = () => {
-    nevigate("/Signin");
-  };
-  const logout = () => {
-    toLogin()
-    localStorage.removeItem("Health-token");
-    setToken(null);
-  };
+  const [token, setToken] = useState(localStorage.getItem("Health-token"));
 
   return (
     <>
       {token === null ? (
-    // toLogin()
+        // toLogin()
         <div className="w-full h-full">
           <Intro />
         </div>
       ) : (
-        <div>
-          <p>Home</p>
-          <button
-            className="bg-red-500 p-5 rounded-lg shadow-lg"
-            onClick={logout}
-          >
-            Logout
-          </button>
+        <div className="h-full w-full flex">
+          <Sidebar setToken={setToken} />
+          <HomeMain />
         </div>
       )}
     </>

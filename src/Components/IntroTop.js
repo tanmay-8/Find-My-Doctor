@@ -25,7 +25,7 @@ const IntroTop = () => {
   };
   return (
     <div className="w-full p-6 h-fit bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500 md:px-20 lg:px-32 md:pt-16  text-white ">
-      <div className="md:flex items-center justify-between">
+      <div className="md:flex items-center justify-between mb-4">
         <div className="w-fit space-x-4 flex items-center font-semibold transition-all duration-400 mx-auto md:mx-0 border-2 shadow-2xl p-2 hover:scale-110 rounded-lg">
           <img
             src={Logo}
