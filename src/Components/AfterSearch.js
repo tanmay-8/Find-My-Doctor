@@ -36,7 +36,7 @@ const AfterSearch = (props) => {
   }, [query]);
 
   return (
-    <div>
+    <div className="transition-all">
       <div className="p-5 space-y-2">
         <button className="cursor-pointer transition-all hover:scale-105" onClick={()=>setQuery("")}>
           <img src={closeImg} alt="close" className="h-8"></img>

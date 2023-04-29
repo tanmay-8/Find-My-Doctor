@@ -7,7 +7,7 @@ const DoctorState = (props) => {
 
   
   const getDoctorsplace = async () => {
-    console.log("run")
+    // console.log("run")
     // api call
     const response = await fetch("http://localhost:5000/api/doctor/getDoctorsplace", {
       method: "GET",
@@ -19,12 +19,11 @@ const DoctorState = (props) => {
       
     });
     let json = await response.json();
-    console.log(json)
+    // console.log(json)
     json = json.reverse();
     setDoctors(json);
   };
 
-  //get place using id
   const getDoctor = async (id) => {
     // api call
     const response = await fetch(
@@ -33,11 +32,13 @@ const DoctorState = (props) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "auth-token":localStorage.getItem("Health-token"),
         },
       }
     );
     let json = await response.json();
     setDoctor(json);
+    return json
   };
 
   return (

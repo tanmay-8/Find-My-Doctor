@@ -1,18 +1,22 @@
 import React, { useState, useContext, useEffect } from "react";
 import ham from "../Images/ham.png";
-import location from "../Images/location.png";
 import AfterSearch from "./AfterSearch";
 import BeforeSearch from "./BeforeSearch";
 import Doctors from "./Doctors";
 import doctorContext from "../contexts/doctorContext";
-import Appointmnets from "./Appointmnets";
+import appointmentContext from "../contexts/appointmentContext";
+import Appointment from "./Appointment";
+import SelectCity from "./SelectCity";
 
 const HomeMain = () => {
   const context = useContext(doctorContext);
+  const context2 = useContext(appointmentContext);
   const { getDoctorsplace } = context;
+  const { appointments, getAppointments } = context2;
 
   useEffect(() => {
     getDoctorsplace();
+    getAppointments();
     // eslint-disable-next-line
   }, []);
 
@@ -65,10 +69,7 @@ const HomeMain = () => {
             className="h-10 cursor-pointer"
           ></img>
         </button>
-        <div className=" flex space-x-1 cursor-pointer hover:scale-110 transition-all items-center text-xl text-blue-700">
-          <img src={location} alt="location" className="h-10"></img>
-          <span>{localStorage.getItem("Health-place")}</span>
-        </div>
+        <SelectCity />
       </div>
       <div className="">
         <div className="w-full py-5 justify-center flex">
@@ -86,8 +87,18 @@ const HomeMain = () => {
         )}
       </div>
       <hr></hr>
-      <div>
-        <Appointmnets />
+      <div className="py-2">
+        {appointments.length !== 0 ? (
+          <>
+            <div className="p-4">
+              <p className="text-gray-500 p-2 ">Recent Appointments</p>
+              <Appointment appointment={appointments[0]} />
+            </div>
+            <hr></hr>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
       <div>
         <Doctors />

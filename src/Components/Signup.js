@@ -30,7 +30,7 @@ function Signup() {
  
        if (json.success) {
         localStorage.setItem("Health-token",json.authtoken)
-        localStorage.setItem("Health-place",cred.city)
+        localStorage.setItem("Health-place",cred.city[0].toUpperCase()+cred.city.slice(1).toLowerCase())
          nevigate("/")
        } else{
          alert.innerHTML = json.error 

@@ -32,7 +32,7 @@ function Login() {
  
        if (json.success) {
          localStorage.setItem("Health-token",json.authtoken)
-         localStorage.setItem("Health-place",json.city)
+         localStorage.setItem("Health-place",json.city[0].toUpperCase()+json.city.slice(1).toLowerCase())
          nevigate("/")
        } else{
          alert.innerHTML = json.error 

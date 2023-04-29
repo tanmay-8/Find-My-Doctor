@@ -1,52 +1,70 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     screens: {
-      'sm': '640px',
+      sm: "640px",
       // => @media (min-width: 640px) { ... }
 
-      'md': '800px',
+      md: "800px",
       // => @media (min-width: 768px) { ... }
 
-      'lg': '1048px',
+      lg: "1048px",
       // => @media (min-width: 1024px) { ... }
 
-      'xl': '1280px',
+      xl: "1280px",
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1536px',
+      "2xl": "1536px",
       // => @media (min-width: 1536px) { ... }
     },
-    extend:{
-        backgroundImage: {
-          "sign-bg":"url(./Images/background2.svg)",
+    extend: {
+      keyframes: {
+        spread: {
+          "0%": { height: "0rem", width: "0rem" },
+          "20%": { height: "2rem", width: "4rem" },
+          "40%": { height: "4rem", width: "8rem" },
+          "60%": { height: "6rem", width: "12rem" },
+          "80%": { height: "8rem", width: "16rem" },
+          "100%": { height: "10rem", width: "20rem" },
         },
-        height:{
-          "h-login":"34rem"
+        shrink: {
+          from: { height: "12rem", width: "24rem" },
+          To: { height: "0rem", width: "0rem" },
         },
-        fontFamily:{
-          regular:['Varela Round', 'sans-serif'],
-          logo:['Ubuntu', 'sans-serif'],
-          quote:['Lilita One', 'cursive'],
-        },
-        borderRadius:{
-          half:"40%",
-          extra:"10%"
-        },
-        transitionDuration:{
-          "1-s":"1s"
-        },
-        width:{
-          "2full":"200%",
-          "3full":"300%"
-        },
-        colors: {
-          "intro":"#32b2f2"
-        }
+      },
+      animation: {
+        "spread-out": "spread 0.3s linear 1",
+        "shrink-in": "visibility 0s linear 0.33s, opacity 0.33s linear",
+      },
+      backgroundImage: {
+        "sign-bg": "url(./Images/background2.svg)",
+      },
+      height: {
+        "h-login": "34rem",
+        "h-0.1": "1.5px",
+      },
+      fontFamily: {
+        regular: ["Varela Round", "sans-serif"],
+        logo: ["Ubuntu", "sans-serif"],
+        quote: ["Lilita One", "cursive"],
+      },
+      borderRadius: {
+        half: "40%",
+        extra: "10%",
+      },
+      transitionDuration: {
+        "1-s": "1s",
+      },
+      width: {
+        "w-0.1":"1.5px",
+        "2full": "200%",
+        "3full": "300%",
+      },
+      colors: {
+        intro: "#32b2f2",
+      },
     },
   },
   plugins: [],
-}
+};

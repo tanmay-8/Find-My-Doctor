@@ -7,7 +7,7 @@ const Doctors = (props) => {
   const { doctors } = context;
 
   return (
-    <div className="p-5">
+    <div className="p-5 transition-all">
       <p className="text-gray-500 p-2 ">Popular doctors near you</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4" >
         {doctors.slice(0,6).map((doctor) => {

@@ -1,10 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import doctorImg from "../Images/doctor.jpg";
 import Rating from "react-rating";
 import starFull from "../Images/starFull.png";
 import starEmpty from "../Images/starEmpty.png";
 
 const DoctorCard = ({ doctor }) => {
+  const  nevigate = useNavigate();
+
+  const toBook=(doctor)=>{
+    nevigate("/Book",{state:{doctor:doctor}})
+  }
   return (
     <div className="shadow-xl border cursor-pointer rounded-2xl transition-all  border-blue-700">
       <div className="flex rounded-t-2xl p-2 space-x-3">
@@ -15,7 +21,7 @@ const DoctorCard = ({ doctor }) => {
         ></img>
         <div className="space-y-2">
           <div>
-            <button className="bg-green-600 text-sm md:text-base text-white py-2 px-2 shadow-lg transition-all hover:scale-105 rounded-lg">
+            <button className="bg-green-600 text-sm md:text-base text-white py-2 px-2 shadow-lg transition-all hover:scale-105 rounded-lg" onClick={()=>{toBook(doctor)}}>
               Book Appointmnet
             </button>
           </div>
@@ -45,6 +51,10 @@ const DoctorCard = ({ doctor }) => {
         <div className="font-semibold text-2xl border-b border-white mt-2">
           {doctor.name}
         </div>
+
+        <div className="mt-4 font-semibold text-xl">
+          {doctor.expertise.join(", ")}
+        </div>
         <div className="mt-4">{doctor.about.slice(0, 200)}</div>
         <div className="mt-4">
           {/* <span className="text-lg">Experience:</span>{" "} */}
@@ -54,7 +64,10 @@ const DoctorCard = ({ doctor }) => {
           {/* <span className="text-lg">Experiences:</span>{" "} */}
           {doctor.experiences.slice(0, 1).join(", ")}
         </div>
-        <div className="mt-4">{doctor.expertise.join(", ")}</div>
+        <div className="mt-4">
+          {/* <span className="text-lg">Experiences:</span>{" "} */}
+          {doctor.address}
+        </div>
       </div>
     </div>
   );

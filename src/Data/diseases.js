@@ -36,7 +36,7 @@ const diseases = [
       desc: "These are a group of conditions that progressively damage the nervous system. Symptoms vary depending on the specific disease, but can include muscle weakness, tremors, difficulty with movement or balance, and cognitive decline.",
     },
     {
-      title: "Skin care ",
+      title: "Skin care",
       img: skin,
       desc: "This is a broad category that includes a range of conditions affecting the skin, such as acne, eczema, psoriasis, and dermatitis.",
     },

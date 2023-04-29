@@ -41,7 +41,7 @@ const BeforeSearch = (props) => {
   return (
     <div
       className="p-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 
-                gap-5 justify-center"
+                gap-5 justify-center transition-all"
     >
       {diseases.map((disease) => {
         let index = diseases.indexOf(disease);
