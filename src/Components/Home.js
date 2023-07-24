@@ -10,7 +10,6 @@ function Home() {
   return (
     <>
       {token === null ? (
-        // toLogin()
         <div className="w-full h-full">
           <Intro />
         </div>

@@ -23,6 +23,7 @@ const IntroTop = () => {
       about.scrollIntoView({ behavior: "smooth" });
     }
   };
+  
   return (
     <div className="w-full p-6 h-fit bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500 md:px-20 lg:px-32 md:pt-16  text-white ">
       <div className="md:flex items-center justify-between mb-4">

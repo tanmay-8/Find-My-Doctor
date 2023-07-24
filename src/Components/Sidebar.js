@@ -7,21 +7,13 @@ import settings from "../Images/settings.png";
 import appointments from "../Images/appointment.png";
 import about from "../Images/about.png";
 
-const Sidebar = (props) => {
-  const { setToken } = props;
+const Sidebar = () => {
   const nevigate = useNavigate();
 
-  const toLogin = () => {
-    nevigate("/Signin");
-  };
-  const logout = () => {
-    toLogin();
-    localStorage.removeItem("Health-token");
-    setToken(null);
-  };
   const enableScroll = () => {
     window.onscroll = function () {};
   };
+
   const hideMenu = () => {
     let menu = document.getElementById("sidebar");
     if (menu.classList.contains("open")) {
@@ -37,6 +29,15 @@ const Sidebar = (props) => {
   const toHome = () => {
     nevigate("/");
     hideMenu();
+  };
+
+  const logout = () => {
+    localStorage.removeItem("Health-token");
+    localStorage.removeItem("Health-place");
+    localStorage.removeItem("Health-name");
+    localStorage.removeItem("Health-email");
+    localStorage.removeItem("Health-phone");
+    toHome()
   };
   return (
     <div
@@ -83,14 +84,20 @@ const Sidebar = (props) => {
 
         <div
           className="cursor-pointer pb-2 border-blue-700 transition-all hover:scale-110 flex items-center space-x-4 text-blue-700"
-          onClick={logout}
+          onClick={() => {
+            hideMenu();
+            nevigate("/Setting");
+          }}
         >
           <span>
             <img src={settings} className="h-10" alt="settings"></img>
           </span>
           <span className="text-xl ">Settings</span>
         </div>
-        <div className="cursor-pointer pb-2 border-blue-700 transition-all hover:scale-110 flex items-center space-x-4 text-blue-700">
+        <div
+          className="cursor-pointer pb-2 border-blue-700 transition-all hover:scale-110 flex items-center space-x-4 text-blue-700"
+          onClick={logout}
+        >
           <span>
             <img src={about} className="h-10" alt="about"></img>
           </span>

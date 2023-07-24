@@ -12,7 +12,8 @@ import kidney from "../Images/Diseases/kidney.png";
 import mental from "../Images/Diseases/mental.png";
 import neuro from "../Images/Diseases/neuro.png";
 import skin from "../Images/Diseases/skin.png";
-// 
+
+// Types of diseases
 const diseases = [
     {
       title: "Common cold",

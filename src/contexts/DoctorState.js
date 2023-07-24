@@ -5,40 +5,37 @@ const DoctorState = (props) => {
   const [doctors, setDoctors] = useState([]);
   const [doctor, setDoctor] = useState(null);
 
-  
   const getDoctorsplace = async () => {
-    // console.log("run")
-    // api call
-    const response = await fetch("http://localhost:5000/api/doctor/getDoctorsplace", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token":localStorage.getItem("Health-token"),
-        "city":localStorage.getItem("Health-place")
-      },
-      
-    });
+    const response = await fetch(
+      "http://localhost:5000/api/doctor/getDoctorsplace",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("Health-token"),
+          city: localStorage.getItem("Health-place"),
+        },
+      }
+    );
     let json = await response.json();
-    // console.log(json)
     json = json.reverse();
     setDoctors(json);
   };
 
   const getDoctor = async (id) => {
-    // api call
     const response = await fetch(
       `http://localhost:5000/api/doctor/getdoctor/${id}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token":localStorage.getItem("Health-token"),
+          "auth-token": localStorage.getItem("Health-token"),
         },
       }
     );
     let json = await response.json();
     setDoctor(json);
-    return json
+    return json;
   };
 
   return (

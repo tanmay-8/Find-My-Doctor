@@ -3,40 +3,41 @@ import rateContext from "./rateContext";
 
 const RateState = (props) => {
   //ratings given by perticular user
-  const [ratingbyuser, setRatingbyuser] = useState([]);
-  //ratings given to perticular plaec
-  const [ratingbyplace, setRatingbyplace] = useState([]);
+  const [ratingbyuser, setRatingbyUser] = useState([]);
+  //ratings given to perticular doctor
+  const [ratingbydoctor, setRatingbyDoctor] = useState([]);
 
-  //getting ratings by id of place
-  const getRatingbyplace = async (id) => {
-    // api call
+  //getting ratings by id of doctor
+  const getRatingbyDoctor = async (id) => {
     const response = await fetch(
-      `http://localhost:5000/api/rating/getbyplace/${id}`,
+      `http://localhost:5000/api/rating/getbyDoctor/${id}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("Health-token"),
         },
       }
     );
     let json = await response.json();
     json = json.reverse();
-    setRatingbyplace(json);
+    console.log(json);
+    setRatingbyDoctor(json);
   };
 
   //getting ratings by user
-  const getRatingbyuser = async () => {
+  const getRatingbyUser = async () => {
     // api call
     const response = await fetch(`http://localhost:5000/api/rating/getbyuser`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("wifi-token"),
+        "auth-token": localStorage.getItem("Health-token"),
       },
     });
     let json = await response.json();
     json = json.reverse();
-    setRatingbyuser(json);
+    setRatingbyUser(json);
   };
 
   //adding rating
@@ -45,7 +46,7 @@ const RateState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("wifi-token"),
+        "auth-token": localStorage.getItem("Health-token"),
       },
       body: JSON.stringify(rating),
     });
@@ -58,10 +59,10 @@ const RateState = (props) => {
     //sending props in context
     <rateContext.Provider
       value={{
-        ratingbyplace,
+        ratingbydoctor,
         ratingbyuser,
-        getRatingbyplace,
-        getRatingbyuser,
+        getRatingbyDoctor,
+        getRatingbyUser,
         addRating,
       }}
     >

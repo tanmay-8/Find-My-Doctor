@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import location from "../Images/location.png";
 
 const SelectCity = () => {
+
   const [city, setCity] = useState("");
   const [place, setPlace] = useState(localStorage.getItem("Health-place"));
 
@@ -42,9 +43,11 @@ const SelectCity = () => {
         if (json.success) {
           closeChange();
           localStorage.setItem(
-            "Health-place",city[0].toUpperCase()+city.slice(1).toLowerCase()
+            "Health-place",
+            city[0].toUpperCase() + city.slice(1).toLowerCase()
           );
-          setPlace(city[0].toUpperCase()+city.slice(1).toLowerCase());
+          setPlace(city[0].toUpperCase() + city.slice(1).toLowerCase());
+          window.location.reload()
         } else {
           alert.innerHTML = json.error;
         }
@@ -55,7 +58,6 @@ const SelectCity = () => {
   };
 
   useEffect(() => {
-    // setPlace(localStorage.getItem("Health-place"));
   }, [place]);
 
   return (

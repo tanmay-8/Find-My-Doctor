@@ -3,11 +3,13 @@ import doctorContext from "../contexts/doctorContext";
 import DoctorCard from "./DoctorCard";
 import closeImg from "../Images/close.png";
 
+// Component for showing doctors after searched by user
 const AfterSearch = (props) => {
   const context = useContext(doctorContext);
   const { doctors } = context;
-  const { query,setQuery } = props;
+  const { query, setQuery } = props;
 
+  // checking if query text is in expertise array
   const isInclude = (expertise, query) => {
     for (let i = 0; i < expertise.length; i++) {
       if (expertise[i].toLowerCase().includes(query.toLowerCase())) {
@@ -17,6 +19,7 @@ const AfterSearch = (props) => {
     return false;
   };
 
+  // searching doctor according to expertise
   const filter = (doctors, query) => {
     // eslint-disable-next-line
     let filtered = doctors.filter((doctor) => {
@@ -29,16 +32,20 @@ const AfterSearch = (props) => {
     });
     return filtered;
   };
-  const [filtered, setFilteres] = useState([]);
+
+  const [filtered, setFiltered] = useState([]);
   useEffect(() => {
-    setFilteres(filter(doctors, query));
+    setFiltered(filter(doctors, query));
     // eslint-disable-next-line
   }, [query]);
 
   return (
     <div className="transition-all">
       <div className="p-5 space-y-2">
-        <button className="cursor-pointer transition-all hover:scale-105" onClick={()=>setQuery("")}>
+        <button
+          className="cursor-pointer transition-all hover:scale-105"
+          onClick={() => setQuery("")}
+        >
           <img src={closeImg} alt="close" className="h-8"></img>
         </button>
         {filtered.length === 0 ? (

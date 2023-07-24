@@ -4,15 +4,16 @@ import Appointment from "./Appointment";
 import backImg from "../Images/back.png";
 import { useNavigate } from "react-router-dom";
 
+// showing all appointments
 const Appointmnets = () => {
 
   const nevigate = useNavigate();
-
   const context = useContext(appointmentContext);
   const { appointments, getAppointments } = context;
 
   useEffect(() => {
     getAppointments();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -34,7 +35,7 @@ const Appointmnets = () => {
         <div className="text-xl font-bold text-center p-2">No Appointments</div>
       ) : (
         <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {appointments.slice(0, 6).map((appointment) => {
+          {appointments.map((appointment) => {
             return (
               <Appointment key={appointment._id} appointment={appointment} />
             );

@@ -5,20 +5,28 @@ import backImg from "../Images/back.png";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Multiselect from "multiselect-react-dropdown";
-// import doctorContext from "../contexts/doctorContext";
 import appointmentContext from "../contexts/appointmentContext";
+import rateContext from "../contexts/rateContext";
+import Rating from "./Rating";
 
+// for booking appointment
 const BookAppointment = () => {
   const nevigate = useNavigate();
-  // const context1 = useContext(doctorContext);
+
+  const context = useContext(rateContext);
   const context2 = useContext(appointmentContext);
 
-  const { bookAppointment, appointments, getAppointments } = context2;
+  const { getRatingbyDoctor, ratingbydoctor } = context;
+  const { bookAppointment, appointments } = context2;
 
+  // getting id of doctor
   const location = useLocation();
   const id = location.state.doctor._id;
+
+  // eslint-disable-next-line
   const [thisDoc, setThisDoc] = useState(location.state.doctor);
 
+  // initializing appointment
   const [appointment, setAppointment] = useState({
     doctor: id,
     patientName: "",
@@ -29,6 +37,7 @@ const BookAppointment = () => {
     appointmentDate: "",
     problem: "",
   });
+
 
   useEffect(() => {
     setAppointment({
@@ -41,17 +50,20 @@ const BookAppointment = () => {
       appointmentDate: "",
       problem: "",
     });
+    getRatingbyDoctor(id);
   }, [id, appointments]);
 
   const [availableTimes, setAvailableTimes] = useState([]);
 
+  // creating range of one month
   const minDate = new Date();
   const maxDate = new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000);
 
-  const [selectedDate, setSelectedDate] = useState(null);
 
+  const [selectedDate, setSelectedDate] = useState(null);
   const { booked, daysInWeek, timeFrom, timeTo } = thisDoc;
 
+  // for checking if time is already booked on current date
   const checkIfInBookedTime = (time, times) => {
     for (let i = 0; i < times.length; i++) {
       if (parseFloat(times[i].$numberDecimal) === parseFloat(time)) {
@@ -60,6 +72,8 @@ const BookAppointment = () => {
     }
     return false;
   };
+
+  // if any slot available on date
   const istimeAvailable = (e) => {
     let date = e.getMonth() + 1 + "/" + e.getDate() + "/" + e.getFullYear();
     for (let i = 0; i < booked.length; i++) {
@@ -74,6 +88,7 @@ const BookAppointment = () => {
     return true;
   };
 
+  // get available slots on selected date
   const getTimes = (date) => {
     let givenDate = { date: date, time: [] };
     for (let i = 0; i < booked.length; i++) {
@@ -99,6 +114,7 @@ const BookAppointment = () => {
     setAvailableTimes(newavailableTimes);
   };
 
+  // checking if date is available
   const checkAvailableDate = (e) => {
     let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
     let day = weekdays[e.getDay()];
@@ -125,8 +141,8 @@ const BookAppointment = () => {
         const json = await bookAppointment(appointment);
         if (!json.success) {
           alert.innerHTML = json.error;
-        }else{
-          nevigate("/Appointmenst")
+        } else {
+          nevigate("/Appointments");
         }
       } catch (e) {
         alert.innerHTML = "Internal server error";
@@ -135,11 +151,11 @@ const BookAppointment = () => {
   };
 
   return (
-    <div className="min-h-screen w-full  p-10 bg-blue-100">
+    <div className="min-h-screen w-full  p-10 bg-blue-50">
       {thisDoc !== undefined && thisDoc !== null && thisDoc !== {} ? (
         <div className="w-full h-full p-2 shadow-xl rounded-xl bg-white">
           <div className="">
-          <div className="w-fit hover:scale-110 transition-all duration-200">
+            <div className="w-fit hover:scale-110 transition-all duration-200">
               <button>
                 <img
                   src={backImg}
@@ -310,6 +326,14 @@ const BookAppointment = () => {
                 </button>
               </div>
             </form>
+          </div>
+          <div className="px-3 py-3 space-y-3">
+            <h1 className="text-xl text-gray-500">Reviews</h1>
+            {ratingbydoctor.map((rating)=>{
+              return(
+                <Rating key={rating._id} rating={rating}/>
+              )
+            })}
           </div>
         </div>
       ) : (

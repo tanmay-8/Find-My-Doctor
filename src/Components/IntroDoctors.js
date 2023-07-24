@@ -7,6 +7,7 @@ import next from "../Images/next.png";
 const IntroDoctors = () => {
   const [docIndex, setdocIndex] = useState(0);
 
+  // Using demo data
   let doctors = [
     {
       img: doctor2,
@@ -42,6 +43,7 @@ const IntroDoctors = () => {
       doctorsS.style.transform = `translateX(${toTranslate}%)`;
     }
   };
+  
   return (
     <div id={"doctors"} className="bg-blue-600 md:py-28 md:px-15 p-5 relative">
       <img

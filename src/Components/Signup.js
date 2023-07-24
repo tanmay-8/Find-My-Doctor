@@ -1,44 +1,54 @@
-import {React, useState } from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const nevigate = useNavigate()
-   // initializing credentials
-   const [cred, setCred] = useState({name:"",email: "",phoneNumber:"",city:"",password: "" });
+  const nevigate = useNavigate();
+  // initializing credentials
+  const [cred, setCred] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    city: "",
+    password: "",
+  });
 
-   //to set credentials on change of input
-   const onChange = (e) => {
-     setCred({ ...cred, [e.target.name]: e.target.value });
-   };
- 
-   const createUser = async (e) => {
-     let alert = document.getElementById("alert");
-     try {
-       e.preventDefault();
-       const response = await fetch(
-         "http://localhost:5000/api/user/addUser",
-         {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-           },
-           body: JSON.stringify(cred),
-         }
-       );
- 
-       const json = await response.json();
- 
-       if (json.success) {
-        localStorage.setItem("Health-token",json.authtoken)
-        localStorage.setItem("Health-place",cred.city[0].toUpperCase()+cred.city.slice(1).toLowerCase())
-         nevigate("/")
-       } else{
-         alert.innerHTML = json.error 
-       }
-     } catch {
-       alert.innerHTML = "Internal server error.";
-     }
-   };
+  //to set credentials on change of input
+  const onChange = (e) => {
+    setCred({ ...cred, [e.target.name]: e.target.value });
+  };
+
+  const createUser = async (e) => {
+    let alert = document.getElementById("alert");
+    try {
+      e.preventDefault();
+      const response = await fetch("http://localhost:5000/api/user/addUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cred),
+      });
+
+      const json = await response.json();
+
+      if (json.success) {
+        localStorage.setItem("Health-token", json.authtoken);
+        localStorage.setItem(
+          "Health-place",
+          cred.city[0].toUpperCase() + cred.city.slice(1).toLowerCase()
+        );
+        localStorage.setItem("Health-name", json.user.name);
+        localStorage.setItem("Health-email", json.user.email);
+        localStorage.setItem("Health-phone", json.user.phoneNumber);
+
+        nevigate("/");
+      } else {
+        alert.innerHTML = json.error;
+      }
+    } catch {
+      alert.innerHTML = "Internal server error.";
+    }
+  };
   return (
     <div className="w-full h-full ">
       <form

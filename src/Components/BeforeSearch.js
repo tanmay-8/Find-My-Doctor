@@ -4,8 +4,10 @@ import diseases from "../Data/diseases";
 import Popup from "reactjs-popup";
 
 const BeforeSearch = (props) => {
-  const {setQuery} =props;
+  // getting setquery function from parent
+  const { setQuery } = props;
 
+  // checking if disease card is at edge to show popups correctly
   const isEndf = (index) => {
     let width = window.innerWidth;
     if (width <= 640) {
@@ -34,9 +36,9 @@ const BeforeSearch = (props) => {
     return false;
   };
 
-  const search = (query)=>{
-    setQuery(query)
-  }
+  const search = (query) => {
+    setQuery(query);
+  };
 
   return (
     <div
@@ -65,7 +67,10 @@ const BeforeSearch = (props) => {
             >
               <p className="text-center text-sm">{disease.desc}</p>
             </Popup>
-            <div onClick={()=>search(disease.title)} className="w-full flex justify-center p-2 h-1/2 cursor-pointer">
+            <div
+              onClick={() => search(disease.title)}
+              className="w-full flex justify-center p-2 h-1/2 cursor-pointer"
+            >
               <img
                 src={disease.img}
                 className="h-full"
