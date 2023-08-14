@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 const start = async() => {
   try{
-      await connectToMongo();
+      await connectToMongo(process.env.mongoURL);
       app.listen(port, () => {
         console.log("Listening on port " + port);
       });

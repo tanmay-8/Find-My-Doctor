@@ -2,10 +2,10 @@ import React from "react";
 import close from "../Images/close.png";
 import { useNavigate } from "react-router-dom";
 import logo from "../Images/logo.png";
+import logOut from "../Images/logout.png"
 import home from "../Images/home.png";
 import settings from "../Images/settings.png";
 import appointments from "../Images/appointment.png";
-import about from "../Images/about.png";
 
 const Sidebar = () => {
   const nevigate = useNavigate();
@@ -37,7 +37,7 @@ const Sidebar = () => {
     localStorage.removeItem("Health-name");
     localStorage.removeItem("Health-email");
     localStorage.removeItem("Health-phone");
-    toHome()
+    window.location.reload()
   };
   return (
     <div
@@ -99,9 +99,9 @@ const Sidebar = () => {
           onClick={logout}
         >
           <span>
-            <img src={about} className="h-10" alt="about"></img>
+            <img src={logOut} className="h-10" alt="logout"></img>
           </span>
-          <span className="text-xl ">About</span>
+          <span className="text-xl ">Logout</span>
         </div>
       </div>
     </div>

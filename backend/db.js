@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 
-const mongoURL = "mongodb://0.0.0.0:27017/HealthCare";
 
-const connectToMongo = async () => {
+const connectToMongo = async (mongoURL) => {
   mongoose.connect(
     mongoURL,
     () => {

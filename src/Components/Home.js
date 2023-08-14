@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Intro from "./Intro";
 import Sidebar from "./Sidebar";
 import "reactjs-popup/dist/index.css";
@@ -6,6 +6,10 @@ import HomeMain from "./HomeMain";
 
 function Home() {
   const [token, setToken] = useState(localStorage.getItem("Health-token"));
+
+  useEffect(()=>{
+    setToken(localStorage.getItem("Health-token"))
+  },[])
 
   return (
     <>

@@ -4,10 +4,17 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const User = require("../Models/User");
 const fetchuser = require("../Middlewares/fetchuser");
+const fetchadmin = require("../Middlewares/fetchadmin")
+const multer = require("multer");
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 //Adding doctor: POST "/api/doctor/addDoctor".
 router.post(
   "/addDoctor",
+  fetchadmin,
+  upload.single("image"),
   [
     body("name", "Enter valid name").isLength({ min: 3, max: 30 }),
     body("qualifications", "Enter valid qualifications").isArray({
@@ -19,9 +26,6 @@ router.post(
       min: 1,
       max: 5,
     }),
-    body("about", "Enter about yourself")
-      .isString()
-      .isLength({ min: 200, max: 500 }),
     body("experiences", "Enter about your past experiences").isArray({
       min: 1,
       max: 5,
@@ -91,6 +95,14 @@ router.post(
         });
       }
 
+      let image = {
+        name: req.file.fileName,
+        image: {
+          data: req.file.buffer,
+          contentType: req.file.mimetype,
+        },
+      };
+
       //saving doctor in database
       doctor = await Doctor.create({
         name: name,
@@ -109,6 +121,7 @@ router.post(
         timeFrom: timeFrom,
         timeTo: timeTo,
         email: email,
+        image:image
       });
 
       success = true;

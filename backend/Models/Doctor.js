@@ -1,6 +1,16 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+const Image = {
+  name:{
+    type:String,
+  }
+  ,image:{
+    data:Buffer,
+    contentType:String,
+  }
+}
+
 const DoctorSchema = new Schema({
   name: {
     type: String,
@@ -91,6 +101,10 @@ const DoctorSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  image:{
+    type:Image,
+    required:true,
+  }
 });
 
 const Doctor = mongoose.model("doctor", DoctorSchema);
