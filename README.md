@@ -93,5 +93,3 @@ mongod
 
 ## More
 - The project still has lot of scope for improvement.
-- We can create a separate portal for doctors to manage appointments.
-- The addition of doctors has to be done manually. 
