@@ -91,5 +91,3 @@ mongod
 
 - Check http://localhost:3000/
 
-## More
-- The project still has lot of scope for improvement.
